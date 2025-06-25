@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HSMM Store - Premium Social Media Services</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6c5ce7;
+            --primary-light: #857be3;
+            --secondary: #a29bfe;
+            --dark: #2d3436;
+            --light: #f5f6fa;
+            --success: #00b894;
+            --danger: #d63031;
+            --warning: #fdcb6e;
+            --glow: rgba(108, 92, 231, 0.3);
+            --game: #e84393;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #f9f9f9;
+            color: var(--dark);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, var(--glow) 0%, transparent 70%);
+            z-index: -1;
+            animation: float 15s infinite alternate ease-in-out;
+            opacity: 0.5;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(108, 92, 231, 0.05) 0%, transparent 100%);
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 20px 0;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(108, 92, 231, 0.3);
+            text-align: center;
+            animation: fadeIn 1s ease, glowHeader 3s infinite alternate;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        header::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                to bottom right,
+                transparent,
+                transparent,
+                transparent,
+                rgba(255, 255, 255, 0.1),
+                transparent
+            );
+            transform: rotate(30deg);
+            animation: shine 5s infinite;
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .logo i {
+            margin-right: 15px;
+            color: var(--warning);
+            filter: drop-shadow(0 0 5px rgba(253, 203, 110, 0.5));
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        .contact-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 5px 20px rgba(108, 92, 231, 0.5);
+            z-index: 100;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .contact-btn:hover {
+            transform: scale(1.1) translateY(-5px);
+            box-shadow: 0 8px 25px rgba(108, 92, 231, 0.7);
+        }
+
+        .contact-btn i {
+            transition: transform 0.3s ease;
+        }
+
+        .contact-btn:hover i {
+            transform: rotate(15deg);
+        }
+
+        .services-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .service-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease;
+            position: relative;
+            animation: fadeInUp 0.6s ease forwards;
+            opacity: 0;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(108, 92, 231, 0.1) 0%, transparent 100%);
+            z-index: -1;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px) rotateX(5deg) rotateY(5deg);
+            box-shadow: 0 15px 35px rgba(108, 92, 231, 0.3);
+            background: white;
+        }
+
+        .service-card:hover .service-header {
+            background: linear-gradient(135deg, var(--primary-light), var(--secondary));
+        }
+
+        .game-card .service-header {
+            background: linear-gradient(135deg, var(--game), #fd79a8);
+        }
+
+        .game-card:hover .service-header {
+            background: linear-gradient(135deg, #fd79a8, var(--game));
+        }
+
+        .service-header {
+            padding: 20px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            display: flex;
+            align-items: center;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-header::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                to bottom right,
+                transparent,
+                transparent,
+                transparent,
+                rgba(255, 255, 255, 0.1),
+                transparent
+            );
+            transform: rotate(30deg);
+            animation: shine 6s infinite;
+        }
+
+        .service-icon {
+            font-size: 2rem;
+            margin-right: 15px;
+            filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.2));
+            transition: transform 0.3s ease;
+        }
+
+        .service-card:hover .service-icon {
+            transform: scale(1.1) rotate(10deg);
+        }
+
+        .service-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        .service-items {
+            padding: 20px;
+        }
+
+        .service-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .service-item:hover {
+            transform: translateX(5px);
+            border-bottom-color: var(--secondary);
+        }
+
+        .service-item:last-child {
+            border-bottom: none;
+        }
+
+        .item-name {
+            font-weight: 500;
+        }
+
+        .item-price {
+            font-weight: 600;
+            color: var(--primary);
+            position: relative;
+        }
+
+        .game-card .item-price {
+            color: var(--game);
+        }
+
+        .item-price::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .game-card .item-price::after {
+            background: var(--game);
+        }
+
+        .service-item:hover .item-price::after {
+            width: 100%;
+        }
+
+        .buy-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 10px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 500;
+            margin-top: 15px;
+            transition: all 0.4s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(108, 92, 231, 0.3);
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            text-align: center;
+            letter-spacing: 0.5px;
+        }
+
+        .game-card .buy-btn {
+            background: linear-gradient(135deg, var(--game), #fd79a8);
+            box-shadow: 0 5px 15px rgba(232, 67, 147, 0.3);
+        }
+
+        .buy-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .buy-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(108, 92, 231, 0.5);
+        }
+
+        .game-card .buy-btn:hover {
+            box-shadow: 0 8px 25px rgba(232, 67, 147, 0.5);
+        }
+
+        .buy-btn:hover::before {
+            left: 100%;
+        }
+
+        .buy-btn:active {
+            transform: translateY(0);
+        }
+
+        .premium-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--warning);
+            color: var(--dark);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            animation: pulse 2s infinite, float 3s infinite ease-in-out;
+            box-shadow: 0 3px 10px rgba(253, 203, 110, 0.5);
+            z-index: 2;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 30px;
+            color: #666;
+            font-size: 0.9rem;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(253, 203, 110, 0.7); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(253, 203, 110, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(253, 203, 110, 0); }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(2deg); }
+            100% { transform: translateY(0) rotate(0deg); }
+        }
+
+        @keyframes shine {
+            0% { left: -100%; }
+            20% { left: 100%; }
+            100% { left: 100%; }
+        }
+
+        @keyframes glowHeader {
+            0% { box-shadow: 0 10px 30px rgba(108, 92, 231, 0.3); }
+            100% { box-shadow: 0 10px 40px rgba(108, 92, 231, 0.5); }
+        }
+
+        @keyframes cardGlow {
+            0% { box-shadow: 0 5px 15px rgba(108, 92, 231, 0.3); }
+            100% { box-shadow: 0 5px 20px rgba(108, 92, 231, 0.5); }
+        }
+
+        .service-card:nth-child(1) { animation-delay: 0.1s; }
+        .service-card:nth-child(2) { animation-delay: 0.2s; }
+        .service-card:nth-child(3) { animation-delay: 0.3s; }
+        .service-card:nth-child(4) { animation-delay: 0.4s; }
+        .service-card:nth-child(5) { animation-delay: 0.5s; }
+        .service-card:nth-child(6) { animation-delay: 0.6s; }
+        .service-card:nth-child(7) { animation-delay: 0.7s; }
+        .service-card:nth-child(8) { animation-delay: 0.8s; }
+        .service-card:nth-child(9) { animation-delay: 0.9s; }
+        .service-card:nth-child(10) { animation-delay: 1.0s; }
+
+        /* Contact Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal.show {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transform: translateY(-50px);
+            transition: transform 0.3s ease;
+            position: relative;
+            animation: modalFadeIn 0.3s ease forwards;
+        }
+
+        .modal.show .modal-content {
+            transform: translateY(0);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #666;
+            transition: color 0.3s ease;
+        }
+
+        .close-modal:hover {
+            color: var(--danger);
+        }
+
+        .modal h2 {
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .modal p {
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .contact-info {
+            margin-top: 20px;
+        }
+
+        .contact-info div {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .contact-info i {
+            margin-right: 10px;
+            color: var(--primary);
+            width: 20px;
+        }
+
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Cart Notification */
+        .cart-notification {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--success);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 30px;
+            box-shadow: 0 5px 15px rgba(0, 184, 148, 0.4);
+            z-index: 1000;
+            animation: fadeInUp 0.3s ease forwards;
+            display: flex;
+            align-items: center;
+        }
+
+        .cart-notification i {
+            margin-right: 10px;
+        }
+
+        /* WhatsApp Button */
+        .whatsapp-btn {
+            background: #25D366;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 30px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+        }
+
+        .whatsapp-btn i {
+            margin-right: 10px;
+        }
+
+        .whatsapp-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.5);
+            background: #20b858;
+        }
+
+        /* Instagram Button */
+        .instagram-btn {
+            background: linear-gradient(45deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 30px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(193, 53, 132, 0.3);
+        }
+
+        .instagram-btn i {
+            margin-right: 10px;
+        }
+
+        .instagram-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(193, 53, 132, 0.5);
+            background: linear-gradient(45deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .services-container {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+            
+            .logo {
+                font-size: 2rem;
+            }
+            
+            .contact-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+                bottom: 20px;
+                right: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i class="fas fa-rocket"></i>
+                <span>HSMM Store</span>
+            </div>
+            <p class="tagline">Premium Social Media & Gaming Services</p>
+        </header>
+
+        <div class="services-container">
+            <!-- Instagram Services -->
+            <div class="service-card">
+                <div class="service-header">
+                    <div class="service-icon">
+                        <i class="fab fa-instagram"></i>
+                    </div>
+                    <div class="service-title">Instagram</div>
+                </div>
+                <div class="service-items">
+                    <div class="service-item">
+                        <span class="item-name">Followers</span>
+                        <span class="item-price">$2.99/1K</span>
+                    </div>
+                    <div class="service-item">
+                        <span class="item-name">Likes</span>
+                        <span class="item-price">$1.99/1K</span>
+                    </div>
+                    <div class="service-item">
+                        <span class="item-name">Views</span>
+                        <span class="item-price">$0.99/1K</span>
+                    </div>
+                    <div class="service-item">
+                        <span class="item-name">Comments</span>
+                        <span class="item-price">$3.99/100</span>
+                    </div>
+                    <button class="buy-btn" data-service="Instagram Followers - $2.99/1K">Buy Now</button>
+                </div>
+            </div>
+
+            <!-- TikTok Services -->
+            <div class="service-card">
+                <div class="service-header">
+                    <div class="service-icon">
+                        <i class="fab fa-tiktok"></i>
+                    </div>
+                    <div class="service-title">TikTok</div>
+                </div>
+                <div class="service-items">
+                    <div class="service-item">
+                        <span class="item-name">Followers</span>
+                        <span class="item-price">$3.99/1K</span>
+                    </div>
+                    <div class="service-item">
+                        <span class="item-name">Likes</span>
+                        <span class="item-price">$2.49/1K</span>
+                    </div>
+                    <div class="service-item">
+                        <span class="item-name">Views</span>
+                        <span class="item-price">$0.79/1K</span>
+                    </div>
+                    <div class="service-item">
+                        <span class="item-name">Shares</span>
+                        <span class="item-price">$4.99/1K</span>
+                    </div>
+                    <button class="buy-btn" data-service="TikTok Followers - $3.99/1K">Buy Now</button>
+                </div>
+            </div>
+
+            <!-- Facebook Services -->
+            <div class="service-card">
+                <div class="service-header">
+                    <div class="service-icon">
+                        <i class="fab fa-facebook"></i>
+                    </div>
+                    <div class="service-title">Facebook</div>
+                </div>
+                <div class="service-items">
+                    <div class="service-item">
+                        <span class="item-name">Followers</span>
+                        <span class="item-price">$4.99/1K</span>
+                    </div>
+                    <div class="service-item">
+                        <span class="item-name">Likes</span>
+                        <span class="item-price">$3.49/1K</span>
+                    </div>
+                    <div class="service-item">
+                        <span class="item-name">Page Likes</span>
+                        <span class="item-price">$5.99/1K</span>
+                    </div>
+                    <div class="service-item">
+                        <span class="item-name">Comments</span>
+                        <span class="item-price">$6.99/1K</span>
+                    </div>
+                    <button class="buy-btn" data-service="Facebook Followers - $4.99/1K">Buy Now</button>
+                </div>
+            </div>
+
+            <!-- YouTube Services -->
+            <div class="service-card">
+                <div class="service-header">
+                    <div class="service-icon">
+                        <i class="fab fa-youtube"></i>
+                    </div>
+                    <div class="service-title">YouTube</div>
+                </div>
+                <div class="service-items">
+                    <div class="service-item">
+                        <span class="item-name">Subscribers</span>
+                        <span class="item-price">$9.99/1K</span>
+                    </div>
+                    <div class="service-item">
+                        <span class="item-name">Likes</span>
+                        <span class="item-price">$4.99/1K</span>
+                    </div>
+                    <div class="service-item">
+                        <span class="item-name">Views</span>
+                        <span class="item-price">$2.99/1K</span>
+                    </div>
+                    <div class="service-item">
+                        <span class="item-name">Comments</span>
+                        <span class="item-price">$7.99/1K</span>
+                    </div>
+                    <button class="buy-btn" data-service="YouTube Subscribers - $9.99/1K">Buy Now</button>
+                </div>
+            </div>
+
+            <!-- Twitter Services -->
+            <div class="service-card">
+                <div class="service-header">
+                    <div class="service-icon">
+                        <i class="fab fa-twitter"></i>
+                    </div>
+                    <div class="service-title">Twitter</div>
+                </div>
+                <div class="service-items">
+                    <div class="service-item">
+                        <span class="item-name">Followers</span>
+                        <span class="item-price">$3.49/1K</span>
+                    </div>
+                    <div class="service-item">
+                        <span class="item-name">Likes</span>
+                        <span class="item-price">$2.99/1K</span>
+                    </div>
+                    <div class="service-item">
+                        <span class="item-name">Retweets</span>
+                        <span class="item-price">$4.99/1K</span>
+                    </div>
+                    <div class="service-item">
+                        <span class="item-name">Replies</span>
+                        <span class="item-price">$5.99/1K</span>
+                    </div>
+                    <button class="buy-btn" data-service="Twitter Followers - $3.49/1K">Buy Now</button>
+                </div>
+            </div>
+
+            <!-- Game Services -->
+            <div class="service-card game-card">
+                <div class="premium-badge">POPULAR</div>
+                <div class="service-header">
+                    <div class="service-icon">
+                        <i class="fas fa-gamepad"></i>
+                    </div>
+                    <div class="service-title">Game Services</div>
+                </div>
+                <div class="service-items">
+                    <div class="service-item">
+                        <span class="item-name">8 Ball Pool Coins</span>
+                        <span class="item-price">$4.99/1M</span>
+                    </div>
+                    <div class="service-item">
+                        <span class="item-name">8 Ball Pool Pass</span>
+                        <span class="item-price">$8.99</span>
+                    </div>
+                    <div class="service-item">
+                        <span class="item-name">PUBG UC</span>
+                        <span class="item-price">$9.99/1K</span>
+                    </div>
+                    <div class="service-item">
+                        <span class="item-name">Free Fire Diamonds</span>
+                        <span class="item-price">$7.99/1K</span>
+                    </div>
+                    <div class="service-item">
+                        <span class="item-name">COD Points</span>
+                        <span class="item-price">$10.99/1K</span>
+                    </div>
+                    <button class="buy-btn" data-service="8 Ball Pool Coins - $4.99/1M">Buy Now</button>
+                </div>
+            </div>
+
+            <!-- Snapchat Services -->
+            <div class="service-card">
+                <div class="service-header">
+                    <div class="service-icon">
+                        <i class="fab fa-snapchat"></i>
+                    </div>
+                    <div class="service-title">Snapchat</div>
+                </div>
+                <div class="service-items">
+                    <div class="service-item">
+                        <span class="item-name">Followers</span>
+                        <span class="item-price">$6.99/1K</span>
+                    </div>
+                    <div class="service-item">
+                        <span class="item-name">Story Views</span>
+                        <span class="item-price">$4.99/1K</span>
+                    </div>
+                    <div class="service-item">
+                        <span class="item-name">Snap Score</span>
+                        <span class="item-price">$8.99/10K</span>
+                    </div>
+                    <button class="buy-btn" data-service="Snapchat Followers - $6.99/1K">Buy Now</button>
+                </div>
+            </div>
+
+            <!-- Premium Accounts -->
+            <div class="service-card">
+                <div class="premium-badge">HOT</div>
+                <div class="service-header">
+                    <div class="service-icon">
+                        <i class="fas fa-crown"></i>
+                    </div>
+                    <div class="service-title">Premium Accounts</div>
+                </div>
+                <div class="service-items">
+                    <div class="service-item">
+                        <span class="item-name">YouTube Premium</span>
+                        <span class="item-price">$14.99/mo</span>
+                    </div>
+                    <div class="service-item">
+                        <span class="item-name">Netflix Premium</span>
+                        <span class="item-price">$12.99/mo</span>
+                    </div>
+                    <div class="service-item">
+                        <span class="item-name">Spotify Premium</span>
+                        <span class="item-price">$9.99/mo</span>
+                    </div>
+                    <div class="service-item">
+                        <span class="item-name">Canva Pro</span>
+                        <span class="item-price">$11.99/mo</span>
+                    </div>
+                    <button class="buy-btn" data-service="YouTube Premium - $14.99/mo">Buy Now</button>
+                </div>
+            </div>
+
+            <!-- Creative Tools -->
+            <div class="service-card">
+                <div class="premium-badge">NEW</div>
+                <div class="service-header">
+                    <div class="service-icon">
+                        <i class="fas fa-paint-brush"></i>
+                    </div>
+                    <div class="service-title">Creative Tools</div>
+                </div>
+                <div class="service-items">
+                    <div class="service-item">
+                        <span class="item-name">CapCut Pro</span>
+                        <span class="item-price">$8.99/mo</span>
+                    </div>
+                    <div class="service-item">
+                        <span class="item-name">Adobe CC</span>
+                        <span class="item-price">$24.99/mo</span>
+                    </div>
+                    <div class="service-item">
+                        <span class="item-name">Final Cut Pro</span>
+                        <span class="item-price">$29.99</span>
+                    </div>
+                    <div class="service-item">
+                        <span class="item-name">VSCO Premium</span>
+                        <span class="item-price">$7.99/mo</span>
+                    </div>
+                    <button class="buy-btn" data-service="CapCut Pro - $8.99/mo">Buy Now</button>
+                </div>
+            </div>
+
+            <!-- Other Services -->
+            <div class="service-card">
+                <div class="service-header">
+                    <div class="service-icon">
+                        <i class="fas fa-ellipsis-h"></i>
+                    </div>
+                    <div class="service-title">Other Services</div>
+                </div>
+                <div class="service-items">
+                    <div class="service-item">
+                        <span class="item-name">Instagram Support</span>
+                        <span class="item-price">Contact Us</span>
+                    </div>
+                    <div class="service-item">
+                        <span class="item-name">Pinterest Followers</span>
+                        <span class="item-price">$4.99/1K</span>
+                    </div>
+                    <div class="service-item">
+                        <span class="item-name">Twitch Followers</span>
+                        <span class="item-price">$7.99/1K</span>
+                    </div>
+                    <div class="service-item">
+                        <span class="item-name">Website Traffic</span>
+                        <span class="item-price">$1.99/1K</span>
+                    </div>
+                    <a href="https://www.instagram.com/hsmmsupport?igsh=eTJiaGxqcWxmbHVx&utm_source=qr" class="instagram-btn" target="_blank">
+                        <i class="fab fa-instagram"></i> Instagram Support
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>&copy; 2023 HSMM Store. All rights reserved.</p>
+            <p>Disclaimer: Our services are for marketing purposes only.</p>
+            <a href="https://wa.link/a5t75k" class="whatsapp-btn" target="_blank">
+                <i class="fab fa-whatsapp"></i> Contact us on WhatsApp
+            </a>
+        </footer>
+    </div>
+
+    <!-- Floating Contact Button -->
+    <div class="contact-btn" id="contactBtn">
+        <i class="fas fa-paper-plane"></i>
+    </div>
+
+    <!-- Contact Modal -->
+    <div class="modal" id="contactModal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeModal">&times;</span>
+            <h2>Contact Us</h2>
+            <p>Have questions or need support? Reach out to our team and we'll get back to you as soon as possible.</p>
+            
+            <div class="contact-info">
+                <div>
+                    <i class="fas fa-envelope"></i>
+                    <span>hsmmservices@gmail.com</span>
+                </div>
+                <div>
+                    <i class="fas fa-phone-alt"></i>
+                    <span>+923195179084</span>
+                </div>
+                <div>
+                    <i class="fas fa-clock"></i>
+                    <span>24/7 Customer Support</span>
+                </div>
+                <div>
+                    <i class="fab fa-whatsapp"></i>
+                    <a href="https://wa.link/a5t75k" target="_blank" style="color: var(--primary); text-decoration: none;">
+                        Chat on WhatsApp
+                    </a>
+                </div>
+                <div>
+                    <i class="fab fa-instagram"></i>
+                    <a href="https://www.instagram.com/hsmmsupport?igsh=eTJiaGxqcWxmbHVx&utm_source=qr" target="_blank" style="color: var(--primary); text-decoration: none;">
+                        Follow on Instagram
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Contact modal functionality
+        const contactBtn = document.getElementById('contactBtn');
+        const contactModal = document.getElementById('contactModal');
+        const closeModal = document.getElementById('closeModal');
+
+        contactBtn.addEventListener('click', () => {
+            contactModal.classList.add('show');
+            document.body.style.overflow = 'hidden';
+        });
+
+        closeModal.addEventListener('click', () => {
+            contactModal.classList.remove('show');
+            document.body.style.overflow = 'auto';
+        });
+
+        // Close modal when clicking outside
+        window.addEventListener('click', (e) => {
+            if (e.target === contactModal) {
+                contactModal.classList.remove('show');
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Add to cart functionality
+        document.querySelectorAll('.buy-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const service = this.getAttribute('data-service');
+                
+                // Show notification
+                const notification = document.createElement('div');
+                notification.className = 'cart-notification';
+                notification.innerHTML = `<i class="fas fa-check-circle"></i> ${service} added to cart! Redirecting to WhatsApp...`;
+                document.body.appendChild(notification);
+                
+                // Remove notification after 3 seconds
+                setTimeout(() => {
+                    notification.style.animation = 'fadeInUp 0.3s ease reverse forwards';
+                    setTimeout(() => {
+                        document.body.removeChild(notification);
+                    }, 300);
+                }, 3000);
+                
+                // Redirect to WhatsApp after a short delay
+                setTimeout(() => {
+                    window.location.href = "https://wa.link/a5t75k";
+                }, 1500);
+            });
+        });
+
+        // Enhanced card animations when they come into view
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = `fadeInUp 0.6s ease forwards`;
+                    entry.target.style.opacity = '1';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.service-card').forEach(card => {
+            observer.observe(card);
+        });
+
+        // Add floating animation to all premium badges
+        const badges = document.querySelectorAll('.premium-badge');
+        badges.forEach((badge, index) => {
+            badge.style.animationDelay = `${index * 0.2}s`;
+        });
+
+        // Add subtle background animation
+        let angle = 0;
+        function updateBackground() {
+            angle += 0.2;
+            document.body.style.backgroundPosition = `${Math.cos(angle) * 20}px ${Math.sin(angle) * 20}px`;
+            requestAnimationFrame(updateBackground);
+        }
+        updateBackground();
+    </script>
+</body>
+</html>
